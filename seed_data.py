@@ -1,4 +1,6 @@
 from backend.models import db, StampRally, Spot
+import flask
+import flask_sqlalchemy
 from backend.app import create_app
 
 

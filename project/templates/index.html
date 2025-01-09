@@ -1,1 +1,50 @@
 <!--トップページ -->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>スタンプラリー一覧</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="header-container">
+    <script>
+      fetch('header.html')
+        .then(response => response.text())
+        .then(data => document.getElementById('header-container').innerHTML = data);
+    </script>
+  </div>
+  <div class="main-container">
+    <div class="sidebar">
+      <h1>地元<br>スタンプラリー</h1>
+    </div>
+    <div class="content">
+      <div id="stamprally1" class="stamprally-item">
+        <div class="content">
+          <h2>埼玉県さいたま市スタンプラリー</h2>
+          <p>Saitama</p>
+          <button class="join-button">参加する</button>
+        </div>
+        <img src="https://via.placeholder.com/150" alt="サンプル写真">
+      </div>
+      <div id="stamprally2" class="stamprally-item">
+        <div class="content">
+          <h2>北海道函館市スタンプラリー</h2>
+          <p>Saitama</p>
+          <button class="join-button">参加する</button>
+        </div>
+        <img src="https://via.placeholder.com/150" alt="サンプル写真">
+      </div>
+      <div id="stamprally3" class="stamprally-item">
+        <div class="content">
+          <h2>秋田県にかほ市スタンプラリー</h2>
+          <p>Saitama</p>
+          <button class="join-button">参加する</button>
+        </div>
+        <img src="https://via.placeholder.com/150" alt="サンプル写真">
+      </div>
+    </div>
+  </div>
+</body>
+</html>
