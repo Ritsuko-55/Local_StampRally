@@ -1,4 +1,3 @@
-<!--トップページ -->
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -19,32 +18,52 @@
     <div class="sidebar">
       <h1>地元<br>スタンプラリー</h1>
     </div>
-    <div class="content">
-      <div id="stamprally1" class="stamprally-item">
-        <div class="content">
-          <h2>埼玉県さいたま市スタンプラリー</h2>
-          <p>Saitama</p>
-          <button class="join-button">参加する</button>
-        </div>
-        <img src="https://via.placeholder.com/150" alt="サンプル写真">
-      </div>
-      <div id="stamprally2" class="stamprally-item">
-        <div class="content">
-          <h2>北海道函館市スタンプラリー</h2>
-          <p>Saitama</p>
-          <button class="join-button">参加する</button>
-        </div>
-        <img src="https://via.placeholder.com/150" alt="サンプル写真">
-      </div>
-      <div id="stamprally3" class="stamprally-item">
-        <div class="content">
-          <h2>秋田県にかほ市スタンプラリー</h2>
-          <p>Saitama</p>
-          <button class="join-button">参加する</button>
-        </div>
-        <img src="https://via.placeholder.com/150" alt="サンプル写真">
-      </div>
+    <div class="content" id="rally-list">
+      <!-- スタンプラリー項目がここに挿入される -->
     </div>
   </div>
+  
+  <script>
+    // スタンプラリー一覧をAPIから取得して動的に表示
+    const rallyListElement = document.getElementById('rally-list');
+
+    function createRallyItem(rally) {
+      const rallyDiv = document.createElement('div');
+      rallyDiv.className = 'stamprally-item';
+      
+      rallyDiv.innerHTML = `
+        <div class="content">
+          <h2>${rally.name}</h2>
+          <button class="join-button">参加する</button>
+        </div>
+        <img src="https://via.placeholder.com/150" alt="${rally.name}">
+      `;
+
+      // ボタンのクリックイベントを設定
+      const joinButton = rallyDiv.querySelector('.join-button');
+      joinButton.addEventListener('click', () => {
+        window.location.href = `/rally/${rally.id}`;
+      });
+
+      return rallyDiv;
+    }
+
+    // スタンプラリー一覧を取得し、表示
+    const rallyIds = [1, 2]; // 表示したいラリーIDのリスト
+    rallyIds.forEach(rallyId => {
+      fetch(`/api/rallies/${rallyId}`)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('ラリー情報の取得に失敗しました。');
+          }
+          return response.json();
+        })
+        .then(rally => {
+          const rallyItem = createRallyItem(rally);
+          rallyListElement.appendChild(rallyItem);
+        })
+        .catch(error => console.error('エラー:', error));
+    });
+  </script>
 </body>
 </html>
